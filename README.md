@@ -20,6 +20,20 @@ ES modules do not load from `file://`, so serve the folder:
 - VS Code: right-click `index.html` → **Open with Live Server**, or
 - Terminal: `python -m http.server 8000` then open http://localhost:8000
 
+## How to Use CampusCash
+
+1. Open the CampusCash application using Live Server.
+2. View the dashboard to see your total income, total expenses, and remaining balance.
+3. Add a transaction by entering its description, amount, and transaction type.
+4. Select Income or Expense depending on the transaction.
+5. Submit the form to save the transaction.
+6. View your recorded transactions in the transaction history.
+7. Edit a transaction when you need to correct its details.
+8. Delete a transaction when it is no longer needed. Confirm the deletion when prompted.
+9. Refresh the browser to verify that your transactions remain saved in LocalStorage.
+
+**Tip:** Enter valid transaction details and amounts to ensure accurate balance calculations.
+
 ## Architecture (MVC with the Week 5 View framework)
 ```
 CampusCash/
@@ -42,7 +56,6 @@ Rules: the Model never touches the DOM; Views never import the Model; only the
 Controller talks to both.
 
 ## Team
-
 | Member | GitHub Username | Role | Main Responsibility |
 |---|---|---|---|
 | Kenneth M. Santiago | santiagoken922-tech | Project Lead / Main Developer | MVC architecture, core implementation, and integration |
