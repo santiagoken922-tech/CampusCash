@@ -134,10 +134,16 @@ export const addTransaction = (input) => {
 };
 
 export const updateTransaction = (id, input) => {
-  state.transactions = state.transactions.map((t) =>
-    t.id === id ? buildTransaction(id, input) : t
-  );
+  const index = state.transactions.findIndex((t) => t.id === id);
+
+  if (index === -1) return null;
+
+  const updatedTransaction = buildTransaction(id, input);
+
+  state.transactions[index] = updatedTransaction;
   saveState();
+
+  return updatedTransaction;
 };
 
 export const deleteTransaction = (id) => {
