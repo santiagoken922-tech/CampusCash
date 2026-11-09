@@ -109,6 +109,9 @@ export const getTransactions = () =>
 export const getTransaction = (id) =>
   state.transactions.find((t) => t.id === id);
 
+export const getEditingTransaction = () =>
+  getTransaction(state.editingId) ?? null;
+
 // Sums in centavos so 0.1 + 0.2 style rounding errors never show up.
 export const getTotals = () => {
   const sumOf = (type) =>
@@ -151,3 +154,4 @@ export const startEditing = (id) => {
 export const stopEditing = () => {
   state.editingId = null;
 };
+export const isEditing = () => state.editingId !== null;

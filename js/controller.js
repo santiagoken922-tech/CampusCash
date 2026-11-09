@@ -16,7 +16,7 @@ const renderForm = () =>
   transactionFormView.render({
     categories: model.CATEGORIES,
     // null => the form shows "Add" mode; a transaction => "Edit" mode
-    transaction: model.getTransaction(model.state.editingId) ?? null,
+    transaction: model.getEditingTransaction(),
   });
 
 const renderAll = () => {
@@ -38,9 +38,14 @@ const controlSubmit = (formData) => {
   }
 
   // 2b. valid: Model changes state and saves to LocalStorage
-  const { editingId } = model.state;
-  if (editingId) model.updateTransaction(editingId, input);
-  else model.addTransaction(input);
+  if (model.isEditing()) {
+    const editingTransaction = model.getEditingTransaction();
+    if (editingTransaction) {
+      model.updateTransaction(editingTransaction.id, input);
+    }
+  } else {
+    model.addTransaction(input);
+  }
   model.stopEditing();
 
   // 3. Re-render everything from the updated Model
