@@ -42,11 +42,12 @@ Rules: the Model never touches the DOM; Views never import the Model; only the
 Controller talks to both.
 
 ## Team
-| Member | Main parts |
-|---|---|
-| _Name 1_ | _fill in_ |
-| _Name 2_ | _fill in_ |
-| _Name 3_ | _fill in_ |
+
+| Member | GitHub Username | Role | Main Responsibility |
+|---|---|---|---|
+| Kenneth M. Santiago | santiagoken922-tech | Project Lead / Main Developer | MVC architecture, core implementation, and integration |
+| Aira S. Esarza | akirasolis18-glitch | UI / Frontend Developer | Interface improvements, CSS, and usability |
+| Miqueas Vajay S. Malintad | miqueasvajaymalintad | Feature / Testing Developer | Transaction features, testing, and bug fixing |
 
 ## Live site
 _Add the GitHub Pages URL here after you have deployed and opened it yourself._
