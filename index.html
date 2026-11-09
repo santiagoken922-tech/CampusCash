@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CampusCash – Student Allowance and Expense Tracker</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <span class="brand">CampusCash</span>
+    </header>
+
+    <main class="container">
+      <section class="welcome">
+        <h1>Dashboard</h1>
+        <p>Track your allowance, log what you spend, and see what's left.</p>
+      </section>
+
+      <!-- SummaryView renders into this element -->
+      <section id="summary" class="summary" aria-label="Financial summary"></section>
+
+      <div class="layout">
+        <!-- TransactionFormView renders into this element -->
+        <section id="form-container" class="card" aria-label="Transaction form"></section>
+
+        <section class="card" aria-label="Transaction history">
+          <h2>Transaction History</h2>
+          <!-- Must be a <ul>: View.renderError() outputs an <li> -->
+          <ul id="transaction-list" class="transaction-list"></ul>
+        </section>
+      </div>
+    </main>
+
+    <!-- Module scripts are deferred, so the DOM exists before they run -->
+    <script type="module" src="js/controller.js"></script>
+  </body>
+</html>
