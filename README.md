@@ -63,4 +63,7 @@ Controller talks to both.
 | Miqueas Vajay S. Malintad | miqueasvajaymalintad | Feature / Testing Developer | Transaction features, testing, and bug fixing |
 
 ## Live site
-_Add the GitHub Pages URL here after you have deployed and opened it yourself._
+
+**CampusCash Website:** https://santiagoken922-tech.github.io/CampusCash/
+
+The application is deployed using GitHub Pages.
