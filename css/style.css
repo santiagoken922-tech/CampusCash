@@ -119,6 +119,19 @@ h1, h2, h3, p { margin: 0; }
 .field-error { color: var(--red); font-size: 0.85rem; min-height: 0; }
 .field:has(.field-error:not(:empty)) input,
 .field:has(.field-error:not(:empty)) select { border-color: var(--red); background: var(--red-tint); }
+.storage-error {
+  color: var(--red);
+  background: var(--red-tint);
+  border: 1px solid var(--red);
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 0.9rem;
+  margin: 10px 0;
+}
+
+.storage-error[hidden] {
+  display: none;
+}
 
 .form-actions { display: flex; gap: 0.6rem; margin-top: 0.25rem; }
 

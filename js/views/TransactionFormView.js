@@ -4,6 +4,7 @@ import { escapeHTML } from "../helpers.js";
 class TransactionFormView extends View {
   _parentElement = document.querySelector("#form-container");
   _errorMessage = "The form could not be loaded.";
+  _storageErrorMessage = "Unable to save your changes. Please try again.";
 
   // data = { categories: [...], transaction: null | {id, description, ...} }
   // transaction === null  -> "add" mode, otherwise "edit" mode
@@ -27,8 +28,9 @@ class TransactionFormView extends View {
       .join("");
 
     return `
-      <h2>${isEditing ? "Edit Transaction" : "Add Transaction"}</h2>
-      <form class="transaction-form" novalidate>
+        <h2>${isEditing ? "Edit Transaction" : "Add Transaction"}</h2>
+        <p class="storage-error" role="alert" hidden></p>
+        <form class="transaction-form" novalidate>
         <input type="hidden" name="id" value="${escapeHTML(id)}" />
 
         <div class="field">
@@ -118,6 +120,15 @@ class TransactionFormView extends View {
     this._parentElement
       .querySelectorAll(".field-error")
       .forEach((slot) => (slot.textContent = ""));
+  }
+
+  showStorageError() {
+    const errorElement = this._parentElement.querySelector(".storage-error");
+
+    if (!errorElement) return;
+
+    errorElement.textContent = this._storageErrorMessage;
+    errorElement.hidden = false;
   }
 }
 

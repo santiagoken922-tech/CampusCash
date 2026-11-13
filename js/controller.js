@@ -27,30 +27,37 @@ const renderAll = () => {
 
 /* ---------- Handlers: called by the Views when the user does something ---------- */
 
-const controlSubmit = (formData) => {
-  const { id, ...input } = formData; // hidden id ignored: the Model's editingId is trusted
 
-  // 1. Ask the Model whether the data is valid
+const controlSubmit = (formData) => {
+  const { id, ...input } = formData;
+
   const errors = model.validateTransaction(input);
   if (Object.keys(errors).length > 0) {
-    transactionFormView.renderErrors(errors); // 2a. invalid: View shows messages
+    transactionFormView.renderErrors(errors);
     return;
   }
 
-  // 2b. valid: Model changes state and saves to LocalStorage
+  let savedTransaction;
+
   if (model.isEditing()) {
     const editingTransaction = model.getEditingTransaction();
-    if (editingTransaction) {
-      model.updateTransaction(editingTransaction.id, input);
-    }
-  } else {
-    model.addTransaction(input);
-  }
-  model.stopEditing();
 
-  // 3. Re-render everything from the updated Model
+    if (!editingTransaction) return;
+
+    savedTransaction = model.updateTransaction(editingTransaction.id, input);
+  } else {
+    savedTransaction = model.addTransaction(input);
+  }
+
+  if (!savedTransaction) {
+    transactionFormView.showStorageError();
+    return;
+  }
+
+  model.stopEditing();
   renderAll();
 };
+
 
 const controlEdit = (id) => {
   if (!model.startEditing(id)) return;
@@ -64,7 +71,13 @@ const controlCancelEdit = () => {
 };
 
 const controlDelete = (id) => {
-  model.deleteTransaction(id); // the View already asked the user to confirm
+  const deleted = model.deleteTransaction(id);
+
+  if (!deleted) {
+    transactionFormView.showStorageError();
+    return;
+  }
+
   renderAll();
 };
 

@@ -22,9 +22,9 @@ export const state = {
 
 /* ---------- LocalStorage ---------- */
 
-const saveState = () => {
+const saveState = (transactions = state.transactions) => {
   try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(state.transactions));
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(transactions));
     return true;
   } catch (err) {
     console.error("CampusCash: could not save data", err);
@@ -128,8 +128,11 @@ export const getTotals = () => {
 
 export const addTransaction = (input) => {
   const transaction = buildTransaction(generateId(), input);
-  state.transactions.push(transaction);
-  saveState();
+  const updatedTransactions = [...state.transactions, transaction];
+
+  if (!saveState(updatedTransactions)) return null;
+
+  state.transactions = updatedTransactions;
   return transaction;
 };
 
@@ -139,17 +142,28 @@ export const updateTransaction = (id, input) => {
   if (index === -1) return null;
 
   const updatedTransaction = buildTransaction(id, input);
+  const updatedTransactions = [...state.transactions];
 
-  state.transactions[index] = updatedTransaction;
-  saveState();
+  updatedTransactions[index] = updatedTransaction;
 
+  if (!saveState(updatedTransactions)) return null;
+
+  state.transactions = updatedTransactions;
   return updatedTransaction;
 };
 
 export const deleteTransaction = (id) => {
-  state.transactions = state.transactions.filter((t) => t.id !== id);
+  if (!state.transactions.some((t) => t.id === id)) return false;
+
+  const updatedTransactions = state.transactions.filter((t) => t.id !== id);
+
+  if (!saveState(updatedTransactions)) return false;
+
+  state.transactions = updatedTransactions;
+
   if (state.editingId === id) state.editingId = null;
-  saveState();
+
+  return true;
 };
 
 export const startEditing = (id) => {
