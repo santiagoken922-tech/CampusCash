@@ -189,11 +189,28 @@ h1, h2, h3, p { margin: 0; }
   .layout { grid-template-columns: 1fr; }
   #form-container { position: static; }
 }
+
 @media (max-width: 640px) {
   .summary { grid-template-columns: 1fr; }
   .transaction { grid-template-columns: 1fr auto; }
-  .transaction__actions { grid-column: 1 / -1; }
+
+  .transaction__actions {
+    grid-column: 1 / -1;
+    display: flex;
+    gap: 0.6rem;
+    width: 100%;
+    margin-top: 0.35rem;
+  }
+
+  .transaction__actions .btn {
+    flex: 1;
+    min-height: 44px;
+    padding: 0.55rem 0.75rem;
+  }
+
   .welcome h1 { font-size: 1.5rem; }
 }
 
-@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
+@media (prefers-reduced-motion: reduce) {
+  * { scroll-behavior: auto !important; }
+}
